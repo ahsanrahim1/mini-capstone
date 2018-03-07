@@ -20,7 +20,6 @@ elsif input_word == "1"
   response=Unirest.get("http://localhost:3000/fifa_18")
   game=response.body
   puts JSON.pretty_generate(game)
-  table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
 elsif input_word == "2"
   response=Unirest.get("http://localhost:3000/mkombat_x")
   game=response.body
