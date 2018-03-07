@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class V1::GamesController < ApplicationController
 
   def all_games
     game = Game.all
@@ -9,13 +9,16 @@ class GamesController < ApplicationController
   def fifa_18
     game = Game.first
     render json: game.as_json
-    
+      
   end
 
   def mkombat_x
     game = Game.second
     render json: game.as_json
-   
+     
   end
 
 end
+
+
+
