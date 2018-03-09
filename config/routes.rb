@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   namespace:v2 do
     get "/games" => "games#index"
 
-    get "/games/:id" => "games#show"
+    get "/game/:id" => "games#show"
+
+    post "/games" => "games#create"
   end
   
 end

@@ -32,6 +32,18 @@ class V2::GamesController < ApplicationController
     
   end
 
+
+  def create
+    game = Game.new(
+      name: params["input_name"],
+      price: params["input_price"],
+      image_url: params["input_image_url"],
+      description: params["input_description"]
+      )
+    game.save
+    render json: game.as_json
+  end
+
 end
 
 
