@@ -1,4 +1,13 @@
-class V1::GamesController < ApplicationController
+class V2::GamesController < ApplicationController
+
+
+  def show
+    game_id = params["id"]
+    game = Game.find_by(id: game_id)
+    render json: game
+  end
+
+
 
   def index
     game = Game.all
