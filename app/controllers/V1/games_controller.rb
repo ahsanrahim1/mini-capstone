@@ -1,6 +1,6 @@
 class V1::GamesController < ApplicationController
 
-  def all_games
+  def index
     game = Game.all
     render json: game.as_json
   end
@@ -16,6 +16,11 @@ class V1::GamesController < ApplicationController
     game = Game.second
     render json: game.as_json
      
+  end
+
+  def find_game
+    id= prams["id"]
+    
   end
 
 end

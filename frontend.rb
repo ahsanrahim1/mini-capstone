@@ -12,16 +12,16 @@ while true
   input_word=gets.chomp 
 
   if input_word == "all"
-    response=Unirest.get("http://localhost:3000/games_url")
+    response=Unirest.get("http://localhost:3000/v1/games_url")
     game=response.body
     puts JSON.pretty_generate(game)
 
   elsif input_word == "1"
-    response=Unirest.get("http://localhost:3000/fifa_18")
+    response=Unirest.get("http://localhost:3000/v1/fifa_18")
     game=response.body
     puts JSON.pretty_generate(game)
   elsif input_word == "2"
-    response=Unirest.get("http://localhost:3000/mkombat_x")
+    response=Unirest.get("http://localhost:3000/v1/mkombat_x")
     game=response.body
     puts JSON.pretty_generate(game)
   end
