@@ -8,6 +8,7 @@ while true
   puts "To view all games enter [all]"
   puts "To view Individual Games enter [1]"
   puts "To add a new game to our ever growing collection enter [2]"
+  puts "To edit a game entry press 3"
   input_word=gets.chomp 
 
   if input_word == "all"
@@ -21,13 +22,40 @@ while true
     response=Unirest.get("http://localhost:3000/v2/game/#{game_id}")
     game=response.body
     puts JSON.pretty_generate(game)
+
+
+
   elsif input_word == "2"
-    params = { "input_name" => "Legend of Zeld",
-      "input_price" => 60, 
-      "input_image_url" => "",
-      "input_description" => "action,rpg"
-     }
+    params = {}
+    print "Name of Game:"
+    params["input_name"]=gets.chomp
+    print "Price:"
+    params["input_price"]=gets.chomp
+    print "Image Url:"
+    params["input_image_url"]=gets.chomp
+    print "Description:"
+    params["input_description"]=gets.chomp
+
+
     response = Unirest.post("http://localhost:3000/v2/games", parameters: params)
+    game= response.body
+    puts JSON.pretty_generate(game)
+
+  elsif input_word == "3"
+    puts "Enter game id:"
+    game_id = gets.chomp
+    response=Unirest.get("http://localhost:3000/v2/game/#{game_id}", parameters:params)
+    params = {}
+    print "Name of Game:"
+    params["input_name"]=gets.chomp
+    print "Price:"
+    params["input_price"]=gets.chomp
+    print "Image Url:"
+    params["input_image_url"]=gets.chomp
+    print "Description:"
+    params["input_description"]=gets.chomp
+
+
     game= response.body
     puts JSON.pretty_generate(game)
   end

@@ -27,10 +27,6 @@ class V2::GamesController < ApplicationController
      
   end
 
-  def find_game
-    id= prams["id"]
-    
-  end
 
 
   def create
@@ -40,6 +36,17 @@ class V2::GamesController < ApplicationController
       image_url: params["input_image_url"],
       description: params["input_description"]
       )
+    game.save
+    render json: game.as_json
+  end
+
+  def update
+    game_id = params["id"] 
+    game = Game.find_by(id: game_id)
+    game.name = params["input_name"] || game.name 
+    game.price = params["input_price"] || game.price
+    game.image_url = params["input_image_url"] || game.image_urk
+    game.description = params["input_description"] || game.description
     game.save
     render json: game.as_json
   end

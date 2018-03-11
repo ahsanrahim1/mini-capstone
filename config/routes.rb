@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get "/game/:id" => "games#show"
 
     post "/games" => "games#create"
+
+    patch "/games/:id" => "games#update"
   end
   
 end
