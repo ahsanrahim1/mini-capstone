@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
     post "/games" => "games#create"
 
-    patch "/games/:id" => "games#update"
+    patch "/game/:id" => "games#update"
+
+    delete "/game/:id" => "games#delete"
   end
   
 end

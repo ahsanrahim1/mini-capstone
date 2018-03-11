@@ -9,6 +9,7 @@ while true
   puts "To view Individual Games enter [1]"
   puts "To add a new game to our ever growing collection enter [2]"
   puts "To edit a game entry press 3"
+  puts "To remove a game entry press 4"
   input_word=gets.chomp 
 
   if input_word == "all"
@@ -58,6 +59,15 @@ while true
     response = Unirest.patch("http://localhost:3000/v2/games/#{game_id}", parameters:params)
     game = response.body
     puts JSON.pretty_generate(game)
+
+  elsif input_word == "4"
+    print "Enter game Id :"
+    game_id = gets.chomp
+    response = Unirest.delete("http://localhost:3000/v2/game/#{game_id}")
+    body = response.body
+    puts JSON.pretty_generate(body)
+
+
   end
 
   puts "press [q] to quit"
