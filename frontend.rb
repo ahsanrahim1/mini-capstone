@@ -44,19 +44,19 @@ while true
   elsif input_word == "3"
     puts "Enter game id:"
     game_id = gets.chomp
-    response=Unirest.get("http://localhost:3000/v2/game/#{game_id}", parameters:params)
     params = {}
     print "Name of Game:"
-    params["input_name"]=gets.chomp
+    params["input_name"] = gets.chomp
     print "Price:"
-    params["input_price"]=gets.chomp
+    params["input_price"] = gets.chomp
     print "Image Url:"
-    params["input_image_url"]=gets.chomp
+    params["input_image_url"] = gets.chomp
     print "Description:"
-    params["input_description"]=gets.chomp
+    params["input_description"] = gets.chomp
+    params.delete_if { |_key, value| value.empty? }
 
-
-    game= response.body
+    response = Unirest.patch("http://localhost:3000/v2/games/#{game_id}", parameters:params)
+    game = response.body
     puts JSON.pretty_generate(game)
   end
 
