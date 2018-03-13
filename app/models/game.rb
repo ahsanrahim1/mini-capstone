@@ -9,7 +9,7 @@ class Game < ApplicationRecord
   end
 
   def tax
-    price / 9 
+    price * 0.09 
   end
 
   def total
