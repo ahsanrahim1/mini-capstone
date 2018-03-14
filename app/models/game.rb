@@ -1,4 +1,11 @@
 class Game < ApplicationRecord
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :price, numaricality:{ greater_than: 0 }
+  validates :description, presence: true
+  validates :description, length: { in: 10..300 }
+
+ 
   def is_discounted
     if price <20
       answer = "yes"
