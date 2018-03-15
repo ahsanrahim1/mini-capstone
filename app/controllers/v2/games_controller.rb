@@ -6,7 +6,7 @@ class V2::GamesController < ApplicationController
   end
 
   def index
-    game = Game.all
+    game = Game.all.order(:id)
     render json: game.as_json
   end
 
