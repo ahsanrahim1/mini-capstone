@@ -6,8 +6,12 @@ class V2::GamesController < ApplicationController
   end
 
   def index
-    game = Game.all.order(:id)
-    render json: game.as_json
+    games = Game.all.order(:price)
+    search_terms = params["search_terms"]
+    if search_terms 
+      games = games.where("name ILIKE ?", "%#{search_terms}%")
+    end
+    render json: games.as_json
   end
 
   def create
