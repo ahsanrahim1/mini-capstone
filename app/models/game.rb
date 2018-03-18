@@ -5,6 +5,10 @@ class Game < ApplicationRecord
   validates :description, presence: true
   validates :description, length: { in: 10..300 }
 
+  def supplier
+    Supplier.find_by(id:supplier_id)
+  end
+
  
   def is_discounted
     if price <20
@@ -33,6 +37,7 @@ class Game < ApplicationRecord
       is_discounted: is_discounted,
       tax: tax,
       total:total,
+      supplier: supplier.as_json
     }
   end
 end
