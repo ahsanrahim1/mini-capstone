@@ -8,7 +8,10 @@ class Game < ApplicationRecord
   def supplier
     Supplier.find_by(id:supplier_id)
   end
-
+  
+  def image
+    Image.where(product_id: id)
+  end
  
   def is_discounted
     if price <20
@@ -32,7 +35,7 @@ class Game < ApplicationRecord
       id: id,
       name:name,
       price: price,
-      image_url:image_url,
+      image_url:image.as_json,
       description:description,
       is_discounted: is_discounted,
       tax: tax,
