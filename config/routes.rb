@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 
   namespace :v2 do
     get "/games" => "games#index"
-    get "/game/:id" => "games#show"
+    get "/games/:id" => "games#show"
     post "/games" => "games#create"
-    patch "/game/:id" => "games#update"
-    delete "/game/:id" => "games#delete"
+    patch "/games/:id" => "games#update"
+    delete "/games/:id" => "games#delete"
+    post "/games/user" => "users#create"
   end
 end

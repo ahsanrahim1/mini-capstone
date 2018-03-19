@@ -40,8 +40,8 @@ while true
     params["input_name"]=gets.chomp
     print "Price:"
     params["input_price"]=gets.chomp
-    print "Image Url:"
-    params["input_image_url"]=gets.chomp
+    # print "Image Url:"
+    # params["input_image_url"]=gets.chomp
     print "Description:"
     params["input_description"]=gets.chomp
 
@@ -58,8 +58,8 @@ while true
     params["input_name"] = gets.chomp
     print "Price:"
     params["input_price"] = gets.chomp
-    print "Image Url:"
-    params["input_image_url"] = gets.chomp
+    # print "Image Url:"
+    # params["input_image_url"] = gets.chomp
     print "Description:"
     params["input_description"] = gets.chomp
     params.delete_if { |_key, value| value.empty? }
