@@ -11,6 +11,7 @@ while true
   puts "To add a new game to our ever growing collection enter [2]"
   puts "To edit a game entry press 3"
   puts "To remove a game entry press 4"
+  puts "To create a new account enter [signup]"
   input_word=gets.chomp 
 
   if input_word == "all"
@@ -74,6 +75,21 @@ while true
     response = Unirest.delete("http://localhost:3000/v2/game/#{game_id}")
     body = response.body
     puts JSON.pretty_generate(body)
+
+  elsif input_word == "signup"
+    params = {}
+    print "Enter Name:"
+    params["name"]=gets.chomp
+    print "Enter email address:"
+    params["email"]=gets.chomp
+    print "password :"
+    params["password"]=gets.chomp
+    print "Confirm password :"
+    params["password_confirmation"] = gets.chomp
+
+
+    response = Unirest.post("http://localhost:3000/v2/user", parameters: params)
+    p response.body 
 
 
   end
