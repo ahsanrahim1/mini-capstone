@@ -1,9 +1,32 @@
 require "unirest"
 
+
+puts "========Login=========="
+print "Enter Email :"
+email = gets.chomp
+print "Enter password :"
+password = gets.chomp
+
+response = Unirest.post(
+  "http://localhost:3000/user_token",
+  parameters: {
+    auth: {
+      email: "#{email}",
+      password: "#{password}"
+    }
+  }
+)
+
+# Save the JSON web token from the response
+jwt = response.body["jwt"]
+# Include the jwt in the headers of any future web requests
+Unirest.default_header("Authorization", "Bearer #{jwt}")
+
+
+
 while true
-
-  system"clear"
-
+  system "clear"
+  p jwt
   puts "Welcome to my Gaming store"
   puts "To view all games enter [all]"
   puts "To search by name press [search]"
@@ -12,7 +35,13 @@ while true
   puts "To edit a game entry press 3"
   puts "To remove a game entry press 4"
   puts "To create a new account enter [signup]"
-  input_word=gets.chomp 
+  puts "to logout enter [logout]"
+  puts "to order [order]"
+  puts "To view all orders press [5]"
+
+
+  input_word=gets.chomp
+     
 
   if input_word == "all"
     response=Unirest.get("http://localhost:3000/v2/games")
@@ -90,6 +119,27 @@ while true
 
     response = Unirest.post("http://localhost:3000/v2/user", parameters: params)
     p response.body 
+
+  elsif input_word == "logout"
+    jwt = ""
+    Unirest.clear_default_headers()
+
+  elsif input_word == "order"
+    params = {
+      game_id: 2,
+      quantity: 3
+    }
+
+    response = Unirest.post("http://localhost:3000/v2/orders", parameters: params)
+    order = response.body
+    puts JSON.pretty_generate(order)
+
+  elsif input_word == "5"
+    response=Unirest.get("http://localhost:3000/v2/orders")
+    orders=response.body
+    puts JSON.pretty_generate(orders)
+
+
 
 
   end

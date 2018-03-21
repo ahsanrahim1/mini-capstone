@@ -6,7 +6,7 @@ class V2::GamesController < ApplicationController
   end
 
   def index
-    games = Game.all.order(:price)
+    games = Game.all.order(:id)
     search_terms = params["search_terms"]
     if search_terms 
       games = games.where("name ILIKE ?", "%#{search_terms}%")

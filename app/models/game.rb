@@ -5,6 +5,8 @@ class Game < ApplicationRecord
   validates :description, presence: true
   validates :description, length: { in: 10..300 }
 
+  has_many  :order
+
   def supplier
     Supplier.find_by(id:supplier_id)
   end
