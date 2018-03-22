@@ -3,7 +3,7 @@ class V2::GamesController < ApplicationController
   def show
     game_id = params["id"]
     game = Game.find_by(id: game_id)
-    render json: game
+    render json: game.as_json
   end
 
   def index
@@ -24,7 +24,7 @@ class V2::GamesController < ApplicationController
         supplier_id: params["supplier_id"]
         )
       game.save
-      render json: game.asnd
+      render json: game.as_json
 
   end
 

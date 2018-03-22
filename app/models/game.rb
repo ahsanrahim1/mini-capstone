@@ -45,7 +45,8 @@ class Game < ApplicationRecord
       is_discounted: is_discounted,
       tax: tax,
       total:total,
-      supplier: supplier.as_json
+      supplier: supplier.as_json,
+      category: categories.map {|category| category.name}
     }
   end
 end

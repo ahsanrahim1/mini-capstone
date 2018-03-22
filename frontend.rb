@@ -40,6 +40,7 @@ while true
   puts "to logout enter [logout]"
   puts "to order [order]"
   puts "To view all orders press [5]"
+  puts "To view products of a category [6]"
 
 
   input_word=gets.chomp
@@ -140,6 +141,15 @@ while true
     response=Unirest.get("http://localhost:3000/v2/orders")
     orders=response.body
     puts JSON.pretty_generate(orders)
+
+  elsif input_word == "6"
+    params = {}
+    print "Enter Category ID :"
+    params["category_id"] = gets.chomp
+    response = Unirest.get("http://localhost:3000/v2/categories", parameters:params)
+    category = response.body
+    puts JSON.pretty_generate(category)
+
   
   end
 
