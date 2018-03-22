@@ -25,6 +25,8 @@ Unirest.default_header("Authorization", "Bearer #{jwt}")
 
 
 while true
+
+
   system "clear"
   p jwt
   puts "Welcome to my Gaming store"
@@ -74,8 +76,8 @@ while true
     # params["input_image_url"]=gets.chomp
     print "Description:"
     params["input_description"]=gets.chomp
-
-
+    print "Supplier Id :"
+    params["supplier_id"]=gets.chomp
     response = Unirest.post("http://localhost:3000/v2/games", parameters: params)
     game= response.body
     puts JSON.pretty_generate(game)
@@ -138,10 +140,7 @@ while true
     response=Unirest.get("http://localhost:3000/v2/orders")
     orders=response.body
     puts JSON.pretty_generate(orders)
-
-
-
-
+  
   end
 
   puts "press [q] to quit"

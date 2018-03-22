@@ -1,4 +1,5 @@
 class V2::GamesController < ApplicationController
+  before_action :authenticate_admin, except: [:index,:show]
   def show
     game_id = params["id"]
     game = Game.find_by(id: game_id)
@@ -16,13 +17,15 @@ class V2::GamesController < ApplicationController
 
   def create
     game = Game.new(
-      name: params["input_name"],
-      price: params["input_price"],
-      # image_url: params["input_image_url"],
-      description: params["input_description"]
-      )
-    game.save
-    render json: game.as_json
+        name: params["input_name"],
+        price: params["input_price"],
+        # image_url: params["input_image_url"],
+        description: params["input_description"],
+        supplier_id: params["supplier_id"]
+        )
+      game.save
+      render json: game.asnd
+
   end
 
   def update
@@ -30,16 +33,17 @@ class V2::GamesController < ApplicationController
     game = Game.find_by(id: game_id)
     game.name = params["input_name"] || game.name 
     game.price = params["input_price"] || game.price
-    # game.image_url = params["input_image_url"] || game.image_url
+      # game.image_url = params["input_image_url"] || game.image_url
     game.description = params["input_description"] || game.description
     game.save
     render json: game.as_json
+    
   end
 
   def delete 
-    game_id = params["id"] 
-    game = Game.find_by(id: game_id)
-    game.destroy
-    render json: {message: "Game Removed"}
+      game_id = params["id"] 
+      game = Game.find_by(id: game_id)
+      game.destroy
+      render json: {message: "Game Removed"}
   end
 end
