@@ -8,6 +8,7 @@ class Game < ApplicationRecord
   has_many  :orders
   has_many :category_games
   has_many :categories, through: :category_games
+  has_many :carted_products
 
 
   def supplier
