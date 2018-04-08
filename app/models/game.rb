@@ -5,10 +5,10 @@ class Game < ApplicationRecord
   validates :description, presence: true
   validates :description, length: { in: 10..300 }
 
-  has_many  :orders
   has_many :category_games
   has_many :categories, through: :category_games
-  has_many :carted_products
+  has_many :carted_games
+  has_many :orders, through: :carted_games
 
 
   def supplier
@@ -41,7 +41,7 @@ class Game < ApplicationRecord
       id: id,
       name:name,
       price: price,
-      image_url:image.as_json,
+      image:image.as_json,
       description:description,
       is_discounted: is_discounted,
       tax: tax,

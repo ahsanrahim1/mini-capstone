@@ -23,8 +23,8 @@ class V2::GamesController < ApplicationController
         description: params["input_description"],
         supplier_id: params["supplier_id"]
         )
-      game.save
-      render json: game.as_json
+    game.save
+    render json: game.as_json
 
   end
 
@@ -41,9 +41,9 @@ class V2::GamesController < ApplicationController
   end
 
   def delete 
-      game_id = params["id"] 
-      game = Game.find_by(id: game_id)
-      game.destroy
-      render json: {message: "Game Removed"}
+    game_id = params["id"] 
+    game = Game.find_by(id: game_id)
+    game.destroy
+    render json: {message: "Game Removed"}
   end
 end

@@ -41,6 +41,9 @@ while true
   puts "to order [order]"
   puts "To view all orders press [5]"
   puts "To view products of a category [6]"
+  puts "To cart a product [7]"
+  puts "To view all your carted products press [8]"
+  puts "to remove a carted product [9]"
 
 
   input_word=gets.chomp
@@ -128,12 +131,8 @@ while true
     Unirest.clear_default_headers()
 
   elsif input_word == "order"
-    params = {
-      game_id: 2,
-      quantity: 3
-    }
 
-    response = Unirest.post("http://localhost:3000/v2/orders", parameters: params)
+    response = Unirest.post("http://localhost:3000/v2/orders")
     order = response.body
     puts JSON.pretty_generate(order)
 
@@ -149,7 +148,26 @@ while true
     response = Unirest.get("http://localhost:3000/v2/categories", parameters:params)
     category = response.body
     puts JSON.pretty_generate(category)
+ elsif input_word == "7"
+   params = {}
+   print "Enter Game ID :"
+   params["game_id"] = gets.chomp
+   print "Enter quantity to purchase :"
+   params["quantity"] = gets.chomp
+   response = Unirest.post("http://localhost:3000/v2/cart", parameters:params)
+   carted_game = response.body
+   puts JSON.pretty_generate(carted_game)
 
+ elsif input_word == "8"
+   response=Unirest.get("http://localhost:3000/v2/cart")
+   cart=response.body
+   puts JSON.pretty_generate(cart)
+elsif input_word == "9"
+  print "Enter carted product id to remove: "
+  input_carted_game_id = gets.chomp
+  response = Unirest.delete("http://localhost:3000/v2/cart/#{input_carted_game_id}")
+  message = response.body
+  puts JSON.pretty_generate(message)
   
   end
 
