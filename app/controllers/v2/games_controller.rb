@@ -23,7 +23,12 @@ class V2::GamesController < ApplicationController
         description: params["input_description"],
         supplier_id: params["supplier_id"]
         )
-    game.save
+    game.save           
+    image = Image.new(
+      game_id: game.id,
+      file_url: "https://wallpaperbrowse.com/media/images/750814.jpg"
+    )
+    image.save
     render json: game.as_json
 
   end

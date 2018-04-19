@@ -16,7 +16,7 @@ class Game < ApplicationRecord
   end
   
   def image
-    Image.where(product_id: id)
+    Image.where(game_id: id)
   end
  
   def is_discounted

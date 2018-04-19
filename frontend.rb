@@ -107,7 +107,7 @@ while true
   elsif input_word == "4"
     print "Enter game Id :"
     game_id = gets.chomp
-    response = Unirest.delete("http://localhost:3000/v2/game/#{game_id}")
+    response = Unirest.delete("http://localhost:3000/v2/games/#{game_id}")
     body = response.body
     puts JSON.pretty_generate(body)
 
